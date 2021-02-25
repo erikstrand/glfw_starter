@@ -3,10 +3,10 @@
 
 //..................................................................................................
 GlfwApp::GlfwApp():
-    background_color(0.2f, 0.3f, 0.3f, 1.0f),
-    tension_range_imvec(8e5, 1e5),
     dragging_(false),
-    zoom_buffer_(0.0)
+    zoom_buffer_(0.0),
+    background_color(0.35f, 0.4f, 0.45f, 1.0f),
+    tension_range_imvec(8e5, 1e5)
 {}
 
 //..................................................................................................
@@ -37,7 +37,7 @@ int32_t GlfwApp::initialize(
 #endif
 
     // glfw: create a window
-    window_ = glfwCreateWindow(width, height, "FUNSIM", NULL, NULL);
+    window_ = glfwCreateWindow(width, height, "OpenGL Demo", NULL, NULL);
     if (window_ == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -225,7 +225,7 @@ void GlfwApp::resize_viewport(int32_t width, int32_t height) {
 }
 
 //..................................................................................................
-void GlfwApp::mouse_button_callback(int button, int action, int mods) {
+void GlfwApp::mouse_button_callback(int button, int action, int /* mods */) {
     if (ImGui::GetIO().WantCaptureMouse) {
         return;
     }
@@ -257,11 +257,10 @@ void GlfwApp::cursor_position_callback(double xpos, double ypos) {
 }
 
 //..................................................................................................
-void GlfwApp::scroll_callback(double xoffset, double yoffset) {
+void GlfwApp::scroll_callback(double /* xoffset */, double yoffset) {
     if (ImGui::GetIO().WantCaptureMouse) {
         return;
     }
-
     zoom_buffer_ += yoffset;
     //std::cout << "scroll " << xoffset << ", " << yoffset << '\n';
 }

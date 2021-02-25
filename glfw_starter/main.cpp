@@ -21,10 +21,10 @@ void scroll_callback(GLFWwindow*, double xoffset, double yoffset) {
 //--------------------------------------------------------------------------------------------------
 int main(int argc, char* argv[]) {
     // Configuration
-    float const x_min = -1.0;
-    float const y_min = -1.0;
-    float const x_max = 1.0;
-    float const y_max = 1.0;
+    float const x_min = -1.1;
+    float const y_min = -1.1;
+    float const x_max = 1.1;
+    float const y_max = 1.1;
     uint32_t const initial_width = 800;
     uint32_t const initial_height = 600;
 
@@ -85,7 +85,11 @@ int main(int argc, char* argv[]) {
         );
 
         ImGui::Begin("OpenGL Demo");
+        auto const framerate = ImGui::GetIO().Framerate;
+        ImGui::Text("%.1f ms/frame (%.1f FPS)", 1000.0f / framerate, framerate);
         ImGui::Text("points: %u", particle_positions.size() / 2);
+        ImGui::Text("t: %.3f", time);
+        ImGui::ColorEdit3("background_color", reinterpret_cast<float*>(&app.background_color));
         ImGui::End();
 
         app.finish_frame();
