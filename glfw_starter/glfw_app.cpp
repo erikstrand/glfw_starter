@@ -6,7 +6,8 @@ GlfwApp::GlfwApp():
     dragging_(false),
     zoom_buffer_(0.0),
     background_color(0.35f, 0.4f, 0.45f, 1.0f),
-    tension_range_imvec(8e5, 1e5)
+    tension_range_imvec(0.0, 1.0),
+    point_size(3.0)
 {}
 
 //..................................................................................................
@@ -103,8 +104,6 @@ int32_t GlfwApp::initialize(
     ImGui_ImplGlfw_InitForOpenGL(window_, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-    glPointSize(3.0);
-
     return 0;
 }
 
@@ -194,6 +193,7 @@ void GlfwApp::finish_frame() {
     glClearColor(background_color.x, background_color.y, background_color.z, background_color.w);
     glClear(GL_COLOR_BUFFER_BIT);
 
+    glPointSize(point_size);
     shader_program_.set_uniform(tension_range_uniform, tension_range_imvec);
     glDrawArrays(GL_POINTS, 0, vbo_size_ / 2);
 

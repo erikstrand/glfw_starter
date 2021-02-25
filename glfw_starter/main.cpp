@@ -19,7 +19,7 @@ void scroll_callback(GLFWwindow*, double xoffset, double yoffset) {
 }
 
 //--------------------------------------------------------------------------------------------------
-int main(int argc, char* argv[]) {
+int main() {
     // Configuration
     float const x_min = -1.1;
     float const y_min = -1.1;
@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
     };
 
     float time = 0.0;
-    float const delta_t = 1e-3;
+    float delta_t = 1e-3;
     while (app.active()) {
         app.start_frame();
 
@@ -87,9 +87,16 @@ int main(int argc, char* argv[]) {
         ImGui::Begin("OpenGL Demo");
         auto const framerate = ImGui::GetIO().Framerate;
         ImGui::Text("%.1f ms/frame (%.1f FPS)", 1000.0f / framerate, framerate);
-        ImGui::Text("points: %u", particle_positions.size() / 2);
+        ImGui::Text("points: %u", static_cast<uint32_t>(particle_positions.size()) / 2);
         ImGui::Text("t: %.3f", time);
+        ImGui::SliderFloat("delta t", &delta_t, 0.0f, 0.01f, "%.3e");
+        ImGui::SliderFloat("alpha", &alpha, 0.0f, 10.0f, "%.2f");
+        ImGui::SliderFloat("beta", &beta, 0.0f, 10.0f, "%.2f");
+        ImGui::SliderFloat("delta", &delta, 0.0f, 10.0f, "%.2f");
         ImGui::ColorEdit3("background_color", reinterpret_cast<float*>(&app.background_color));
+        ImGui::InputFloat("tension scale min", &app.tension_range_imvec.x, 0.0f, 1.0f, "%.2f");
+        ImGui::InputFloat("tension scale max", &app.tension_range_imvec.y, 0.0f, 1.0f, "%.2f");
+        ImGui::SliderFloat("point size", &app.point_size, 1.0f, 10.0f, "%.2f");
         ImGui::End();
 
         app.finish_frame();

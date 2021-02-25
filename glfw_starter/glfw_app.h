@@ -87,6 +87,7 @@ public:
     ImVec4 background_color;
     GLint tension_range_uniform;
     ImVec2 tension_range_imvec;
+    float point_size;
 };
 
 #endif
