@@ -1,0 +1,6 @@
+*.swp
+*.swo
+*.gch
+.DS_Store
+build
+scripts/environment
