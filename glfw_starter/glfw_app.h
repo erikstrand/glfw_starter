@@ -31,7 +31,7 @@ public:
     ShaderProgram const& shader_program() const { return shader_program_; }
     void update_vertex_buffer(float const* data, float const* tensions, uint32_t size);
     void update_vertex_buffer(float const* data, uint32_t size);
-    void finish_frame(uint32_t const n_driven = 0);
+    void finish_frame();
 
     double screen_to_model_coords_x(double x);
     double screen_to_model_coords_y(double y);
@@ -85,10 +85,6 @@ private:
 
 public:
     ImVec4 background_color;
-    // only relevant for gears
-    ImVec4 driven_point_color;
-    ImVec4 default_point_color;
-
     GLint tension_range_uniform;
     ImVec2 tension_range_imvec;
 };

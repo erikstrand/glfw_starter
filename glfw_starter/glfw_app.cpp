@@ -4,8 +4,6 @@
 //..................................................................................................
 GlfwApp::GlfwApp():
     background_color(0.2f, 0.3f, 0.3f, 1.0f),
-    driven_point_color(0.11f, 0.51f, 0.72f, 1.00f),
-    default_point_color(0.45f, 0.55f, 0.60f, 1.00f),
     tension_range_imvec(8e5, 1e5),
     dragging_(false),
     zoom_buffer_(0.0)
@@ -176,7 +174,7 @@ void GlfwApp::update_vertex_buffer(float const* data, uint32_t size) {
 }
 
 //..................................................................................................
-void GlfwApp::finish_frame(uint32_t const n_driven) {
+void GlfwApp::finish_frame() {
     if (dragging_ && (drag_x_ != drag_start_x_ || drag_y_ != drag_start_y_)) {
         double const dx = (drag_x_ - drag_start_x_) / screen_width_ * 2 * half_extents_[0];
         double const dy = (drag_y_ - drag_start_y_) / screen_height_ * -2 * half_extents_[1];
